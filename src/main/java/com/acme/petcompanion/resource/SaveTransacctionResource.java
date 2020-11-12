@@ -9,16 +9,16 @@ import java.util.Date;
 public class SaveTransacctionResource {
 
     @NotNull
-    private MonetaryAmount amount;
+    private float amount;
 
     @NotNull
     private Date creationDate;
 
-    public MonetaryAmount getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(MonetaryAmount amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 }

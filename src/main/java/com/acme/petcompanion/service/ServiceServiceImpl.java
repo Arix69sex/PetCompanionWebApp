@@ -51,9 +51,9 @@ public class ServiceServiceImpl implements ServiceService {
         return serviceRepository.findById(serviceId).map(service -> {
             service.setTitle(serviceRequest.getTitle());
             service.setDescription(serviceRequest.getDescription());
-            service.setAddress(serviceRequest.getAddress());
             service.setReviewScore(serviceRequest.getReviewScore());
             service.setServiceType(serviceRequest.getServiceType());
+            service.setAddress(serviceRequest.getAddress());
             return serviceRepository.save(service);
         }).orElseThrow(() -> new ResourceNotFoundException("Service", "Id", serviceId));
     }

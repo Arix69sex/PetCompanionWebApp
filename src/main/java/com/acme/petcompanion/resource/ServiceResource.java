@@ -6,6 +6,8 @@ public class ServiceResource {
     private String description;
     private float reviewScore;
     private String serviceType;
+    private String address;
+
 
     public Long getId() {
         return id;
@@ -45,5 +47,13 @@ public class ServiceResource {
 
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

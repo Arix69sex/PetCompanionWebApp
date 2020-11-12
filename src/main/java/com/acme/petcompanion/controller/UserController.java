@@ -36,13 +36,13 @@ public class UserController {
                 .collect(Collectors.toList());
         return new PageImpl<>(resources, pageable, resources.size());
     }
-/*
+
     @Operation(summary = "Get User by Id", description = "Get User by Id", tags = {"users"})
     @GetMapping("/users/{userId}")
     public UserResource GetUserById(@PathVariable Long userId){
         return convertToResource(userService.getUserById(userId));
     }
-*/
+
     @Operation(summary = "Create a User", description = "Create a new User", tags = {"user"})
     @PostMapping("/users/")
     public UserResource createUser(@Valid @RequestBody SaveUserResource resource){

@@ -15,7 +15,7 @@ public class SavePlanResource {
     private String description;
 
     @NotNull
-    private MonetaryAmount price;
+    private float price;
 
     public String getName() {
         return name;
@@ -33,11 +33,11 @@ public class SavePlanResource {
         this.description = description;
     }
 
-    public MonetaryAmount getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(MonetaryAmount price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 }

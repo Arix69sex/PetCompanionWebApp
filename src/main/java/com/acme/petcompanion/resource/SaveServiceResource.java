@@ -24,6 +24,7 @@ public class SaveServiceResource {
     @Size(max = 55)
     private String address;
 
+
     public String getTitle() {
         return title;
     }

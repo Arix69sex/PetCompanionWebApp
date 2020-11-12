@@ -15,10 +15,10 @@ public class Service {
     private Long id;
 
     @NotNull
-    private Long title;
+    private String title;
 
     @NotNull
-    private Long description;
+    private String description;
 
     @NotNull
     private float reviewScore;
@@ -42,19 +42,19 @@ public class Service {
         this.id = id;
     }
 
-    public Long getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(Long title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public Long getDescription() {
+    public @NotNull String getDescription() {
         return description;
     }
 
-    public void setDescription(Long description) {
+    public void setDescription(@NotNull String description) {
         this.description = description;
     }
 
