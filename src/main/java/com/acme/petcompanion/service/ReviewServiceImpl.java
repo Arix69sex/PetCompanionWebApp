@@ -73,4 +73,10 @@ public class ReviewServiceImpl implements ReviewService {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("Review", "Id", reviewId));
     }
+
+    @Override
+    public Review getReviewByTitle(String title){
+        return reviewRepository.findByTitle(title)
+                .orElseThrow(() -> new ResourceNotFoundException("Review", "Title", title));
+    }
 }

@@ -25,7 +25,7 @@ public class UserData {
     private float scoreOwner;
 
     @NotNull
-    private float ScoreProvider;
+    private float scoreProvider;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -65,11 +65,11 @@ public class UserData {
     }
 
     public float getScoreProvider() {
-        return ScoreProvider;
+        return scoreProvider;
     }
 
     public void setScoreProvider(float scoreProvider) {
-        ScoreProvider = scoreProvider;
+        this.scoreProvider = scoreProvider;
     }
 
     public User getUser() {

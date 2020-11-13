@@ -67,4 +67,10 @@ public class ServiceServiceImpl implements ServiceService {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("Service", "Id", serviceId));
     }
+
+    @Override
+    public Service getServiceByTitle(String title){
+        return serviceRepository.findByTitle(title)
+                .orElseThrow(() -> new ResourceNotFoundException("Service", "Title", title));
+    }
 }

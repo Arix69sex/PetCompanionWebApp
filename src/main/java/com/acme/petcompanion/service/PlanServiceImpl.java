@@ -60,4 +60,10 @@ public class PlanServiceImpl implements PlanService {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("Plan", "Id", planId));
     }
+
+    @Override
+    public Plan getPlanByName(String name) {
+        return planRepository.findByName(name)
+                .orElseThrow(() -> new ResourceNotFoundException("Plan", "Name", name));
+    }
 }

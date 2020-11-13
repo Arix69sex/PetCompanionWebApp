@@ -16,4 +16,12 @@ public interface UserDataService {
     UserData updateUserData (Long userId,Long userDataId, UserData userDataRequest);
 
     ResponseEntity<?> deleteUserData(Long userId, Long userDataId);
+
+    UserData getUserDataByName(String name);
+
+    UserData getUserDataByLastName(String lastName);
+
+    UserData getUserDataByScoreOwner(float scoreOwner);
+
+    UserData getUserDataByScoreProvider(float scoreProvider);
 }

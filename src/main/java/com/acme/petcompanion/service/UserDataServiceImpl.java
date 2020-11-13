@@ -62,4 +62,28 @@ public class UserDataServiceImpl implements UserDataService {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("User Data", "Id", userDataId));
     }
+
+    @Override
+    public UserData getUserDataByName(String name) {
+        return userDataRepository.findByName(name)
+                .orElseThrow(() -> new ResourceNotFoundException("UserData", "Name", name));
+    }
+
+    @Override
+    public UserData getUserDataByLastName(String lastName) {
+        return userDataRepository.findByLastName(lastName)
+                .orElseThrow(() -> new ResourceNotFoundException("UserData", "LastName", lastName));
+    }
+
+    @Override
+    public UserData getUserDataByScoreOwner(float scoreOwner) {
+        return userDataRepository.findByScoreOwner(scoreOwner)
+                .orElseThrow(() -> new ResourceNotFoundException("UserData", "ScoreOwner", scoreOwner));
+    }
+
+    @Override
+    public UserData getUserDataByScoreProvider(float scoreProvider) {
+        return userDataRepository.findByScoreProvider(scoreProvider)
+                .orElseThrow(() -> new ResourceNotFoundException("UserData", "ScoreProvider", scoreProvider));
+    }
 }

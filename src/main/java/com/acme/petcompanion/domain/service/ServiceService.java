@@ -19,4 +19,5 @@ public interface ServiceService {
 
     ResponseEntity<?> deleteService(Long userId, Long serviceId);
 
+    Service getServiceByTitle (String title);
 }

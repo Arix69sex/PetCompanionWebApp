@@ -16,4 +16,6 @@ public interface PlanService {
     Plan updatePlan (Long serviceId, Long planId, Plan planDetails);
 
     ResponseEntity<?> deletePlan(Long serviceId, Long planId);
+
+    Plan getPlanByName(String name);
 }
