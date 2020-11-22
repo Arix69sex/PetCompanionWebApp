@@ -43,14 +43,14 @@ public class UserController {
         return convertToResource(userService.getUserById(userId));
     }
 
-    @Operation(summary = "Create a User", description = "Create a new User", tags = {"user"})
+    @Operation(summary = "Create a User", description = "Create a new User", tags = {"users"})
     @PostMapping("/users/")
     public UserResource createUser(@Valid @RequestBody SaveUserResource resource){
         User user = convertToEntity(resource);
         return convertToResource(userService.createUser(user));
     }
 
-    @Operation(summary = "Update a User", description = "Update an existing User with given Id", tags = {"user"})
+    @Operation(summary = "Update a User", description = "Update an existing User with given Id", tags = {"users"})
     @PutMapping("/users/{userId}")
     public UserResource updateUser(@PathVariable Long userId, @RequestBody SaveUserResource resource) {
         User user = convertToEntity(resource);
