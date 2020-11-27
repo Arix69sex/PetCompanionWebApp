@@ -1,6 +1,9 @@
 package com.acme.petcompanion.service;
 
+import com.acme.petcompanion.domain.aditionalClasses.ServiceReviewAverage;
 import com.acme.petcompanion.domain.model.Review;
+import com.acme.petcompanion.domain.model.Service;
+import com.acme.petcompanion.domain.model.User;
 import com.acme.petcompanion.domain.repository.ReviewRepository;
 import com.acme.petcompanion.domain.repository.ServiceRepository;
 import com.acme.petcompanion.domain.repository.UserRepository;
@@ -22,6 +25,8 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Autowired
     private UserRepository userRepository;
+
+    private ServiceReviewAverage serviceReviewAverage;
 
     @Override
     public Page<Review> getAllReviews (Pageable pageable){
@@ -52,17 +57,25 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Review createReview (Long userId, Long serviceId, Review reviewDetails){
-        /*if (!userRepository.existsById(userId))
+        if (!userRepository.existsById(userId))
             throw new ResourceNotFoundException("User", "Id", userId);
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                 "User", "Id", userId));
-        Service service = user
+
+        Service service = serviceRepository.findById(serviceId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Service", "Id", serviceId));
-        if (!user)
-            throw new ResourceNotFoundException("User", "Id", userId);*/
-        return null;
+
+        Review review = reviewRepository.findByAuthorIdAndServiceId(userId,serviceId);
+        review.setAuthor(reviewDetails.getAuthor());
+        review.setService(reviewDetails.getService());
+        review.setDescription(reviewDetails.getDescription());
+        review.setTitle(reviewDetails.getTitle());
+        review.setScore(reviewDetails.getScore());
+        service.setReviewScore(serviceReviewAverage.getAverage(reviewRepository, serviceId));
+        serviceRepository.save(service);
+        return reviewRepository.save(review);
     }
 
     public ResponseEntity<?> deleteReview(Long userId, Long serviceId, Long reviewId){

@@ -12,7 +12,6 @@ public interface TransacctionService {
 
     Page<Transacction> getAllTransacctionsByPayerId (Long userId, Pageable pageable);
 
-    Transacction createTransacction(Long payerId, Long recieverId, Transacction transacction);
-
+    Transacction createTransacction(Long payerId, Long recieverId, Transacction transacction, float amount);
 
 }

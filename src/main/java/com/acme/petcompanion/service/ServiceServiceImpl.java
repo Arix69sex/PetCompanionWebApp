@@ -24,6 +24,7 @@ public class ServiceServiceImpl implements ServiceService {
         return serviceRepository.findAll(pageable);
     }
 
+
     @Override
     public Page<Service> getAllServicesByUserId (Long userId, Pageable pageable){
         return serviceRepository.findByUserId(userId, pageable);

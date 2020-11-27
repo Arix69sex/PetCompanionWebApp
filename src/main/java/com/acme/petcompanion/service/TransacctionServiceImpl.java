@@ -1,5 +1,6 @@
 package com.acme.petcompanion.service;
 
+import com.acme.petcompanion.domain.aditionalClasses.TransactionValidator;
 import com.acme.petcompanion.domain.model.Transacction;
 import com.acme.petcompanion.domain.model.User;
 import com.acme.petcompanion.domain.repository.TransacctionRepository;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TransacctionServiceImpl implements TransacctionService {
+
+    private TransactionValidator transactionValidator;
 
     @Autowired
     private TransacctionRepository transacctionRepository;
@@ -37,14 +40,18 @@ public class TransacctionServiceImpl implements TransacctionService {
     }
 
     @Override
-    public Transacction createTransacction(Long payerId, Long recieverId, Transacction transacction) {
+    public Transacction createTransacction(Long payerId, Long recieverId, Transacction transacction, float amount) {
         User payer = userRepository.findById(payerId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "Id", payerId));
         User reciever = userRepository.findById(recieverId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "Id", recieverId));
-        transacction.setPayer(payer);
-        transacction.setReciever(reciever);
-        return transacctionRepository.save(transacction);
+        if (transactionValidator.test(transacction)){
+            transacction.setPayer(payer);
+            transacction.setReciever(reciever);
+            transacction.setAmount(amount);
+            return transacctionRepository.save(transacction);
+        }
+        return transacction;
     }
 
 }

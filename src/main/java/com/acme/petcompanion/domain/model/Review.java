@@ -20,6 +20,8 @@ public class Review {
     @NotNull
     private String description;
 
+    @NotNull
+    private float score;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id",nullable = false)
@@ -30,6 +32,7 @@ public class Review {
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private User author;
+
 
     public Long getId() {
         return id;
@@ -69,5 +72,13 @@ public class Review {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public float getScore() {
+        return score;
+    }
+
+    public void setScore(float score) {
+        this.score = score;
     }
 }

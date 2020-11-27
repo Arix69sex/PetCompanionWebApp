@@ -56,7 +56,7 @@ public class UserDataController {
         return convertToResource(userDataService.createUserData(userId, userData));
     }
 
-    @Operation(summary = "Update a UserData", description = "Update an existing UserData with given UserId", tags = {"user"})
+    @Operation(summary = "Update a UserData", description = "Update an existing UserData with given UserId", tags = {"userData"})
     @PutMapping("/users/{userId}/userData")
     public UserDataResource updateUserData(@PathVariable Long userId, @RequestBody SaveUserDataResource resource) {
         UserData userData = convertToEntity(resource);
