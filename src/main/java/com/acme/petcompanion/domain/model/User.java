@@ -54,4 +54,9 @@ public class User {
     public void setPremium(boolean premium) {
         this.premium = premium;
     }
+
+    public void makeMemento(){
+        User newUser = this;
+        //history.add(newUser)
+    }
 }
