@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class PlanController {
+public class PlansController {
 
     @Autowired
     private ModelMapper mapper;

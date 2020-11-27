@@ -11,7 +11,7 @@ public class SaveReviewResource {
 
     @NotNull
     @Size(max = 250)
-    private String text;
+    private String description;
 
     public String getTitle() {
         return title;
@@ -21,11 +21,11 @@ public class SaveReviewResource {
         this.title = title;
     }
 
-    public String getText() {
-        return text;
+    public String getDescription() {
+        return description;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

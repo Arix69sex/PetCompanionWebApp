@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class UserDataController {
+public class UserDatasController {
     @Autowired
     private ModelMapper mapper;
 
@@ -32,8 +32,8 @@ public class UserDataController {
     @Autowired
     private UserService userService;
 
-    @Operation(summary = "Get All UserData", description = "Get All User Data", tags = {"userData"})
-    @GetMapping("/users/userData")
+    @Operation(summary = "Get All UserData", description = "Get All User Data", tags = {"userDatas"})
+    @GetMapping("/users/userDatas")
     public Page<UserDataResource> getAllUserData(Pageable pageable){
         Page<UserData> userDataPage = userDataService.getAllUserData(pageable);
         List<UserDataResource> resources = userDataPage.getContent()
@@ -43,28 +43,28 @@ public class UserDataController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    @Operation(summary = "Get UserData by UserId", description = "Get UserData by its Userid", tags = {"userData"})
-    @GetMapping("/users/{userId}/userData")
+    @Operation(summary = "Get UserData by UserId", description = "Get UserData by its Userid", tags = {"userDatas"})
+    @GetMapping("/users/{userId}/userDatas")
     public UserDataResource getUserDataByUserId(@PathVariable Long userId){
         return convertToResource(userDataService.getUserDataByUserId(userId));
     }
 
-    @Operation(summary = "Create User Data", description = "Create User Data of a User", tags = {"userData"})
-    @PostMapping("/users/{userId}/userData")
+    @Operation(summary = "Create User Data", description = "Create User Data of a User", tags = {"userDatas"})
+    @PostMapping("/users/{userId}/userDatas")
     public UserDataResource createUserData(@Valid @RequestBody SaveUserDataResource resource, @PathVariable Long userId){
         UserData userData = convertToEntity(resource);
         return convertToResource(userDataService.createUserData(userId, userData));
     }
 
-    @Operation(summary = "Update a UserData", description = "Update an existing UserData with given UserId", tags = {"user"})
-    @PutMapping("/users/{userId}/userData")
+    @Operation(summary = "Update a UserData", description = "Update an existing UserData with given UserId", tags = {"userDatas"})
+    @PutMapping("/users/{userId}/userDatas")
     public UserDataResource updateUserData(@PathVariable Long userId, @RequestBody SaveUserDataResource resource) {
         UserData userData = convertToEntity(resource);
         return convertToResource(userDataService.updateUserData(userId, userData.getId(), userData));
     }
 
-    @Operation(summary = "Delete a UserData", description = "Delete an existing UserData with given Id", tags = {"userData"})
-    @DeleteMapping("/users/{userId}/userData/{userDataId}")
+    @Operation(summary = "Delete a UserData", description = "Delete an existing UserData with given Id", tags = {"userDatas"})
+    @DeleteMapping("/users/{userId}/userDatas/{userDataId}")
     public ResponseEntity<?> deleteUserData(@PathVariable Long userId, @PathVariable Long userDataId, @RequestBody SaveUserDataResource resource) {
        return userDataService.deleteUserData(userId, userDataId);
     }

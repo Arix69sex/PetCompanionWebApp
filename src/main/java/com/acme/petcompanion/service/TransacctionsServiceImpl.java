@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TransacctionServiceImpl implements TransacctionService {
+public class TransacctionsServiceImpl implements TransacctionService {
 
     @Autowired
     private TransacctionRepository transacctionRepository;
@@ -21,30 +21,30 @@ public class TransacctionServiceImpl implements TransacctionService {
     private UserRepository userRepository;
 
     @Override
-    public Transacction getTransacctionsById(Long transacctionId, Pageable pageable) {
+    public Transacction getTransacctionById(Long transacctionId) {
         return transacctionRepository.findById(transacctionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Transaction", "Id", transacctionId));
     }
 
     @Override
     public Page<Transacction> getAllTransacctionsByRecieverId(Long userId, Pageable pageable) {
-        return transacctionRepository.findAllByPayerId(userId, pageable);
-    }
-
-    @Override
-    public Page<Transacction> getAllTransacctionsByPayerId(Long userId, Pageable pageable) {
         return transacctionRepository.findAllByRecieverId(userId, pageable);
     }
 
     @Override
-    public Transacction createTransacction(Long payerId, Long recieverId, Transacction transacction) {
+    public Page<Transacction> getAllTransacctionsByPayerId(Long userId, Pageable pageable) {
+        return transacctionRepository.findAllByPayerId(userId, pageable);
+    }
+
+    @Override
+    public Transacction createTransaction(Long payerId, Long recieverId, Transacction transaction) {
         User payer = userRepository.findById(payerId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "Id", payerId));
         User reciever = userRepository.findById(recieverId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "Id", recieverId));
-        transacction.setPayer(payer);
-        transacction.setReciever(reciever);
-        return transacctionRepository.save(transacction);
+        transaction.setPayer(payer);
+        transaction.setReciever(reciever);
+        return transacctionRepository.save(transaction);
     }
 
 }

@@ -18,6 +18,8 @@ public interface ReviewService {
 
     Review createReview (Long userId, Long serviceId, Review reviewDetails);
 
+    Review updateReview (Long userId, Long serviceId, Long reviewId, Review reviewDetails);
+
     ResponseEntity<?> deleteReview(Long userId, Long serviceId, Long reviewId);
 
     Review getReviewByTitle (String title);

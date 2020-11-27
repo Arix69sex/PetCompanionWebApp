@@ -6,13 +6,11 @@ import org.springframework.data.domain.Pageable;
 
 public interface TransacctionService {
 
-    Transacction getTransacctionsById(Long transacctionId, Pageable pageable);
+    Transacction getTransacctionById(Long transactionId);
 
     Page<Transacction> getAllTransacctionsByRecieverId (Long userId, Pageable pageable);
 
     Page<Transacction> getAllTransacctionsByPayerId (Long userId, Pageable pageable);
 
-    Transacction createTransacction(Long payerId, Long recieverId, Transacction transacction);
-
-
+    Transacction createTransaction(Long payerId, Long recieverId, Transacction transaction);
 }

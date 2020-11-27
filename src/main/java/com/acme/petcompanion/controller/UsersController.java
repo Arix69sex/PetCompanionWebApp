@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class UserController {
+public class UsersController {
 
     @Autowired
     private ModelMapper mapper;
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @Operation(summary = "Create a User", description = "Create a new User", tags = {"users"})
-    @PostMapping("/users/")
+    @PostMapping("/users")
     public UserResource createUser(@Valid @RequestBody SaveUserResource resource){
         User user = convertToEntity(resource);
         return convertToResource(userService.createUser(user));

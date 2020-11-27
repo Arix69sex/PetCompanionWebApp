@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class ServiceController {
+public class ServicesController {
 
     @Autowired
     private ModelMapper mapper;
@@ -75,7 +75,7 @@ public class ServiceController {
     }
 
     @Operation(summary = "Delete a Service", description = "Delete an existing Service with given Id", tags = {"services"})
-    @DeleteMapping("/users/{userId}/service/{serviceId}")
+    @DeleteMapping("/users/{userId}/services/{serviceId}")
     public ResponseEntity<?> deleteService(@PathVariable Long userId, @PathVariable Long serviceId) {
         return serviceService.deleteService(userId, serviceId);
     }

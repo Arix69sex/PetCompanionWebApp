@@ -1,6 +1,8 @@
 package com.acme.petcompanion.service;
 
 import com.acme.petcompanion.domain.model.Review;
+import com.acme.petcompanion.domain.model.Service;
+import com.acme.petcompanion.domain.model.User;
 import com.acme.petcompanion.domain.repository.ReviewRepository;
 import com.acme.petcompanion.domain.repository.ServiceRepository;
 import com.acme.petcompanion.domain.repository.UserRepository;
@@ -52,22 +54,34 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Review createReview (Long userId, Long serviceId, Review reviewDetails){
-        /*if (!userRepository.existsById(userId))
-            throw new ResourceNotFoundException("User", "Id", userId);
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                "User", "Id", userId));
-        Service service = user
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Service", "Id", serviceId));
-        if (!user)
-            throw new ResourceNotFoundException("User", "Id", userId);*/
-        return null;
+                .orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
+        Service service = serviceRepository.findById(serviceId)
+                .orElseThrow(() -> new ResourceNotFoundException("Service", "Id", serviceId));
+        reviewDetails.setAuthor(user);
+        reviewDetails.setService(service);
+        return reviewRepository.save(reviewDetails);
+    }
+
+
+    @Override
+    public Review updateReview (Long userId, Long serviceId, Long reviewId, Review reviewDetails){
+        if (!userRepository.existsById(userId))
+            throw new ResourceNotFoundException("User", "Id", userId);
+        if (!serviceRepository.existsById(serviceId))
+            throw new ResourceNotFoundException("Service", "Id", serviceId);
+        return reviewRepository.findById(reviewId).map(review -> {
+            review.setTitle(reviewDetails.getTitle());
+            review.setDescription(reviewDetails.getDescription());
+            return reviewRepository.save(review);
+        }).orElseThrow(() -> new ResourceNotFoundException("Review", "Id", reviewId));
     }
 
     public ResponseEntity<?> deleteReview(Long userId, Long serviceId, Long reviewId){
         if (!userRepository.existsById(userId))
             throw new ResourceNotFoundException("User", "Id", userId);
+        if (!serviceRepository.existsById(serviceId))
+            throw new ResourceNotFoundException("Service", "Id", serviceId);
         return reviewRepository.findById(reviewId).map(review -> {
             reviewRepository.delete(review);
             return ResponseEntity.ok().build();
